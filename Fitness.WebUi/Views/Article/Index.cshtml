@@ -1,0 +1,60 @@
+﻿@model Fitness.Model.Entities.Article
+@{
+    ViewBag.Title = "Index";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>View</title>
+</head>
+<body>
+    <div class="panel-body form-horizontal">
+        @Html.LabelFor(m => m.Title, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="panel-body form-horizontal">
+        @Html.LabelFor(m => m.Content, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(m => m.Content, new { @class = "form-control", name = "content", Id = "editor", style = "height:50px;" })
+        </div>
+    </div>
+    <br />
+    <div class="panel-body col-md-10 col-md-offset-2">
+        <div id="editor1">
+            <p>this is the ckeditor5 InlineEditor , we shold use download zip package!</p>
+        </div>
+    </div>
+    <div class="panel-body col-md-10 col-md-offset-2">
+        <div id="editor2">
+            <p>this is the ckeditor5 BalloonEditor , we shold use download zip too!</p>
+        </div>
+    </div>
+@section Scripts{
+    <script src="https://cdn.ckeditor.com/ckeditor5/1.0.0-alpha.1/classic/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/1.0.0-alpha.1/inline/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/1.0.0-alpha.1/balloon/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+        .create(document.querySelector('#editor'))
+        .catch(error=> {
+            console.error(error);
+        });
+        InlineEditor
+        .create(document.querySelector('#editor1'))
+        .catch(error=> {
+            console.error(error);
+        });
+        BalloonEditor
+        .create(document.querySelector('#editor2'))
+        .catch(error=> {
+            console.error(error)
+        });
+    </script>
+    }
+</body>
+</html>

@@ -1,0 +1,45 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>CKEditor 5 - Classic editor</title>
+    <script src="https://cdn.ckeditor.com/ckeditor5/1.0.0-alpha.1/classic/ckeditor.js"></script>
+    @*<script src="https://cdn.ckeditor.com/ckeditor5/1.0.0-alpha.1/inline/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/1.0.0-alpha.1/balloon/ckeditor.js"></script>*@
+</head>
+<body>
+    <h1>Classic editor</h1>
+    <textarea name="content" id="editor">
+        <p>This is some sample content.</p>
+    </textarea>
+    <div id="editor1">
+        <p>This is InlineEditor</p>
+    </div>
+    <div id="editor2">
+        <p>This is BalloonEditor</p>
+    </div>
+    <script>
+        ClassicEditor
+            .create( document.querySelector( '#editor' ) )
+            .catch( error => {
+                console.error( error );
+            });
+        //InlineEditor
+        //.create(document.querySelector("#editor1"))
+        //.catch(error=> {
+        //    console.error(error);
+        //});
+        //BalloonEditor
+        //.create(document.querySelector("#editor2"))
+        //.catch(error=> {
+        //    console.error(error);
+        //});
+    </script>
+</body>
+</html>

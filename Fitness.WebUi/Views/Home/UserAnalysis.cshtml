@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.Title = "UserAnalysis";
+}
+@model Fitness.Model.Entities.RegisterViewModel
+
+<style>
+    th {
+        text-align:center;
+    }
+</style>
+<div class="panel panel-info" style="margin-top:30px;width:60%;float:left;">
+    <div class="panel-heading">
+        <h3 class="panel-title">用户信息展示</h3>
+    </div>
+    <div class="panel-body" style="height:500px;position:relative;">
+        <table class="table table-bordered">
+            @*<caption>用户信息表</caption>*@
+            <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>用户名</th>
+                    <th>出生日期</th>
+                    <th>性别</th>
+                    <th>邮箱</th>
+                    <th>手机号</th>
+                </tr>
+            </thead>
+            <tbody id="tableContent" class="text-center">
+                @*@foreach (var item in ViewBag.Data)
+                {
+                    <tr>
+                        <td>@item.Username</td>
+                        <td>@item.Birthday</td>
+                        <td>@( item.Sex == 1 ? '男' : '女')</td>
+                        <td>@item.Email</td>
+                        <td>@item.PhoneNumber</td>
+                    </tr>
+                }*@
+            </tbody>
+        </table>
+        <div style="position:absolute;bottom:0;"><ul id="booPager"></ul></div>
+    </div>
+</div>
+<div class="panel panel-primary" style="width:37%;float:left;margin:30px 0 0 30px;">
+    <div class="panel-heading">
+        <h3 class="panel-title">用户出生日期饼图</h3>
+    </div>
+    <div class="panel-body">
+        <div id="userpie" style="width:400px;height:400px;"></div>
+    </div>
+</div>
+<div style="clear:both;"></div>
+@section scripts{
+    <script src="~/Scripts/echarts.min.js"></script>
+    <script src="~/Scripts/bootstrap-paginator.js"></script>
+    <script src="~/Scripts/mySelf/pager_pie.js"></script>
+}
+<script>
+    initPageTable();
+    initMyPie();    
+</script>
+

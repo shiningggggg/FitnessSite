@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<table align="center" border="1" cellpadding="0" cellspacing="0">
+    <thead align="center">
+        <tr>
+            <td>广告名称</td>
+            <td>广告图片</td>
+            <td>广告内容</td>
+            <td>广告来源</td>
+            <td>广告作者</td>
+            <td>广告描述</td>
+            <td align="center">追加内容</td>
+        </tr>
+    </thead>
+    <tbody id="addTr">
+        @for (var i = 0; i < 5; i++)
+        {
+        <tr align="center">
+            <td><input type="text" name="advTitle" value="@i"/></td>
+            <td><input type="text" name="img" value="@i"/></td>
+            <td><input type="text" name="advContent" value="@i"/></td>
+            <td><input type="text" name="advSource" value="@i"/></td>
+            <td><input type="text" name="advAuthor" value="@i"/></td>
+            <td><input type="text" name="advPosition" value="@i"/></td>
+            <td><input type="button" class="addTr" value="add"/></td>
+        </tr>
+        }
+    </tbody>
+</table>
+@section Scripts{
+    <script>
+        $(function () {
+            $('.addTr').click(function () {
+                var rowIndex = $(this).parent().parent().index();
+                var newRow = document.getElementById('addTr').insertRow(rowIndex + 1);
+                var x = newRow.insertCell(0);
+                var y = newRow.insertCell(1);
+                x.innerHTML = "new cell";
+                y.innerHTML = "<input type='text' name='newtext'>";
+            });
+        });
+    </script>
+    }

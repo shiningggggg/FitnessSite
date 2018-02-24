@@ -1,0 +1,147 @@
+﻿
+@{
+    ViewBag.Title = "EchartsViewPie";
+}
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div id="mainBar" style="border:1px solid #ccc;padding:10px;"></div>
+        <!-- 标签式引入Eharts 如果你把引用echarts的script标签放置head内在IE8-的浏览器中会出现报错，解决的办法就是把标签移动到body内（后）。 -->
+    </div>
+</div>
+@section Scripts{
+<script src="~/Scripts/echarts.min.js"></script>
+<script src="~/Scripts/bootstrap-paginator.js"></script>
+<script src="~/Scripts/mySelf/pager_pie.js"></script>
+    <script type="text/javascript">
+    var width;
+    var height;
+    var myChart;
+    $(function(){
+        //自适应设置
+        width = $(window).width();
+        height = $(window).height();
+        $("#mainBar").css("width",width-240);
+        $("#mainBar").css("height",height-240);
+        console.log(height);
+        setEcharts();
+    });
+
+    $(window).resize(function() {
+        width = $(window).width();
+        height = $(window).height();
+        $("#mainBar").css("width",width-140);
+        $("#mainBar").css("height",height-140);
+    });
+
+    function setEcharts(){
+        myChart = echarts.init(document.getElementById('mainBar'));
+        //自适应
+        window.onresize = myChart.resize;
+        option = {
+            tooltip: {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c} ({d}%)"
+            },
+            legend: {
+                orient: 'vertical',
+                x: 'left',
+                data: ['直达', '营销广告', '搜索引擎', '进行中', '已完成']
+            },
+            toolbox: {
+                show: true,
+                feature: {
+                    mark: { show: true },
+                    dataView: { show: true, readOnly: false },
+                    magicType: {
+                        show: true,
+                        type: ['pie', 'funnel']
+                    },
+                    restore: { show: true },
+                    saveAsImage: { show: true }
+                }
+            },
+            calculable: false,
+            series: [
+                {
+                    name: '访问来源',
+                    type: 'pie',
+                    selectedMode: 'single',
+                    radius: [0, 70],
+
+                    // for funnel
+                    x: '20%',
+                    width: '40%',
+                    funnelAlign: 'right',
+                    max: 1548,
+
+                    itemStyle: {
+                        normal: {
+                            label: {
+                                position: 'inner',
+                            },
+                            labelLine: {
+                                show: false
+                            }
+                        }
+                    },
+                    data: [
+                        { value: 200, name: '直达' },
+                        { value: 200, name: '营销广告' },
+                        { value: 200, name: '搜索引擎'}
+                    ]
+                },
+                {
+                    name: '访问来源',
+                    type: 'pie',
+                    radius: [100, 140],
+
+                    // for funnel
+                    x: '60%',
+                    width: '35%',
+                    funnelAlign: 'left',
+                    max: 1048,
+                    itemStyle: {
+                        normal: {
+                            label: {
+                                show: true,
+                                formatter: function (value) {
+                                    if (value.percent > 2) {
+                                        return value.name + " :\n" + value.value + "(" + value.percent + ")%";
+                                    }
+                                    else {
+                                        return "";
+                                    }
+                                }
+                            },
+                            labelLine: {
+                                show: true, length: 5
+                            }
+                        }
+                    },
+                    data: [
+                        { value: 40, name: '进行中', content: '直达:进行中', tooltip: { formatter: function (params) { return params.data.content; } } },
+                        { value: 60, name: '已完成', content: '直达:已完成', tooltip: { formatter: function (params) { return params.data.content; } } },
+                        { value: 40, name: '进行中', content: '广告:进行中', tooltip: { formatter: function (params) { return params.data.content; } } },
+                        { value: 60, name: '已完成', content: '广告:已完成', tooltip: { formatter: function (params) { return params.data.content; } } },
+                        { value: 60, name: '进行中', content: '搜索:进行中', tooltip: { formatter: function (params) { return params.data.content; } } },
+                        { value: 40, name: '已完成', content: '搜索:已完成', tooltip: { formatter: function (params) { return params.data.content+'('+params.value+'个/'+params.percent+'%'+')' } } },
+                    ]
+                }
+            ]
+        };
+
+        myChart.setOption(option);
+
+        myChart.on('click', function (params) {
+            if(params.seriesIndex==1){
+                alert("单击了"+params.data.content+"外环");
+            }else{
+                alert("单击了"+params.name+"内饼");
+            }
+        });
+    }
+
+    </script>
+}
+

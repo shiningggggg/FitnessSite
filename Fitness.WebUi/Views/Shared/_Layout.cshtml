@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @RenderSection("styles",false)
+</head>
+<body style="padding-top:90px;">
+    <style type="text/css">
+
+    </style>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                @Html.ActionLink("Fitness", "Index", "Home", new { area = "123" }, new { @class = "navbar-brand" })
+            </div>
+            <div>
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/Invitation/Page">邀约页面</a></li>
+                    <li><a href="/Article/Page">讨论页面</a></li>
+                    <li><a href="#">音乐页面</a></li>
+                    <li><a href="#">电影页面</a></li>
+                    <li><a href="/Home/UserAnalysis">用户分析页面</a></li>
+                </ul>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/Register/Page"><span class="glyphicon glyphicon-user"></span>注册</a></li>
+                <li><a href="/Login/Page"><span class="glyphicon glyphicon-log-in"></span>登录</a></li>
+            </ul>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div>
+
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <div  style="display:none;width:100%;">
+            <hr />
+            <footer class="bottom">
+                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            </footer>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts",required:false)
+    <script>
+            $(function () {
+                $("ul.nav").find("li").each(function () {
+                    var a = $(this).find("a:first")[0];
+                    if ($(a).attr("href") === location.pathname) {
+                        $(this).addClass("active");
+                    } else {
+                        $(this).removeClass("active");
+                    }
+                });
+
+            });
+    </script>
+</body>
+</html>
